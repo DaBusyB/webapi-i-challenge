@@ -15,7 +15,38 @@ const server = express()
 //response obj has a send method to send back info to the client
 //some of the request and response methods are provided my Node and some are provided by Express or agumented with new functionality by Express
 server.get('/', (req, res) => {
-    res.send('Hello world')
+    res.send('Hello world!')
+})
+
+//the endpoint above just returns a string
+//in real life, most responses will be in json
+//this time, lets return a json list of hobbits from the url /hobbits
+server.get('/hobbits', (req, res) => {
+    //create a list of hobbits
+    const hobbits = [
+        {
+            id: 1,
+            name: 'Samwise Gamgee'
+        },
+
+        {
+            id: 2,
+            name: 'Frodo Baggins'
+        }
+    ]
+
+    //now parse it, turn it into a string respecting the json format (double quotes, etc)
+    //Express will do JSON formatting for us
+    //http status codes tells client whether specific http request has been sucessfully completed
+    //a part of designing a good API is always returning the correct https response status code
+
+    //we could do this: res.status(200).send(hobbits)
+    //but we want to communicat to next dev that this isnt just sending some data, we're sending JSON
+    //the client could also be formatted to say that it wants JSON
+    //if the client has no preference then it's probably best to send JSON
+    //so instead we will use this
+    res.status(200).json(hobbits)
+
 })
 
 //now tell express to listen to requests coming into a particular port on my computer and answer to those requests
@@ -32,3 +63,5 @@ server.listen(8000, () => console.log('API running on port 8000'))
 // 3 Wire endpoints that we want to listen to
 // 4 Produce a response and send it back to client within the route handler function of the endpoint
 // 5 Tell server to listen to connection on particular port
+
+
