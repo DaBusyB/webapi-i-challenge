@@ -13,9 +13,9 @@ const server = express()
 //(req, res) => {} is a reqest handler function. Express provides this function with the arguments req and res
 //req is a request object and res is a response object. We use these objects and the methods in them, to do things
 //response obj has a send method to send back info to the client
-//some of the request and response methods are provided my Node and some are provided by Express
+//some of the request and response methods are provided my Node and some are provided by Express or agumented with new functionality by Express
 server.get('/', (req, res) => {
-
+    res.send('Hello world')
 })
 
 //now tell express to listen to requests coming into a particular port on my computer and answer to those requests
@@ -26,4 +26,9 @@ server.listen(8000, () => console.log('API running on port 8000'))
 //up to this point, we have an actual server and will run but there are no endpoints configured yet
 //adding endpoint above on line 9
 
-
+//the basic rundown is
+// 1 bring in Express
+// 2 create Express app
+// 3 Wire endpoints that we want to listen to
+// 4 Produce a response and send it back to client within the route handler function of the endpoint
+// 5 Tell server to listen to connection on particular port
